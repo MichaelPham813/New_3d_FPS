@@ -14,12 +14,13 @@ public class BreakableObject : MonoBehaviour
         rb = player.GetComponent<Rigidbody>();
     }
 
+
    private void OnTriggerEnter(Collider collider)
     {
         if (collider.GetComponent< Rigidbody >()!= null) {
             Instantiate(breakable, transform.position,breakable.transform.rotation);
             Destroy(gameObject);
-            time.SlowTime();
+            //time.SlowTime();
         }
         
  

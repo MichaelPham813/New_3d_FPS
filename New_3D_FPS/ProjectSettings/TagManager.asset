@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - Lava
   - JumpTag
+  - TimeStop
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - GrappleUI
   - Player
   - Enemy
-  - 
+  - PostProcessing
   - 
   - 
   - 

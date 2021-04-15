@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf2edee5c58d82540a51f03df9d42094, type: 3}
-  m_Name: RenderPipeline
+  m_Name: URP
   m_EditorClassIdentifier: 
   k_AssetVersion: 5
   k_AssetPreviousVersion: 5
   m_RendererType: 1
   m_RendererData: {fileID: 0}
   m_RendererDataList:
-  - {fileID: 11400000, guid: af6e7c5c163e8be44b4da70cc42bced7, type: 2}
+  - {fileID: 11400000, guid: 99568b23f8ea2d840801070d955d8bd9, type: 2}
   m_DefaultRendererIndex: 0
   m_RequireDepthTexture: 0
   m_RequireOpaqueTexture: 0
@@ -33,8 +33,8 @@ MonoBehaviour:
   m_AdditionalLightsPerObjectLimit: 4
   m_AdditionalLightShadowsSupported: 0
   m_AdditionalLightsShadowmapResolution: 512
-  m_ShadowDistance: 50
-  m_ShadowCascades: 0
+  m_ShadowDistance: 500
+  m_ShadowCascades: 2
   m_Cascade2Split: 0.25
   m_Cascade4Split: {x: 0.067, y: 0.2, z: 0.467}
   m_ShadowDepthBias: 1

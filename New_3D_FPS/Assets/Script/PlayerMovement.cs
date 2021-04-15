@@ -79,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
     public float climbForce, climbSpeedAdd;
     public LayerMask whatIsLadder;
     bool alreadyStoppedAtLadder;
+    bool isWall;
+    float climbTime=10f;
 
     //Input
     private Vector3 inputDirection;
@@ -676,6 +678,40 @@ public class PlayerMovement : MonoBehaviour
     private void EffectStart()
     {
         Instantiate(effect,spawnEffect.transform.position,camera.rotation);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Vector3 climbPos = gameObject.transform.position;
+        Vector3 originalPos = climbPos.normalized;
+        Vector3 normal = collision.GetContact(0).normal;
+        Vector3 horForward = camera.transform.forward;
+        horForward.y = 0;
+        horForward.Normalize();
+        if(Vector3.Angle(horForward,-normal)<=45)
+        {
+            bool ledgePass = true;
+            RaycastHit hit;
+            if(Physics.Raycast(camera.transform.position + Vector3.up*0.5f,-normal,out hit,1,whatIsGround))
+            {
+                ledgePass = false;
+            }
+            if(ledgePass)
+            {
+                Vector3 currPos = camera.transform.position + Vector3.up*0.5f + Vector3.down*0.25f;
+                while(!Physics.Raycast(currPos,-normal,out hit,1,whatIsGround))
+                {
+                    currPos += Vector3.down * 0.05f;
+                    if (currPos.y < camera.transform.position.y - 2f)
+                    {
+                        break;
+                    }
+                }
+                rb.MovePosition(Vector3.Lerp(originalPos, climbPos+Vector3.up*3.5f,climbTime));
+                climbTime += Time.fixedDeltaTime * 20;
+
+            }
+        }
     }
 
 }

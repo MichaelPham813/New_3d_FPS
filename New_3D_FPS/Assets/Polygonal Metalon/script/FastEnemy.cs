@@ -12,7 +12,8 @@ public class FastEnemy : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-    
+    public TimeStop timeStop;
+
     //damgedeal
     public float damagedeal = 5f;
     //Patroling
@@ -45,8 +46,19 @@ public class FastEnemy : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         //TakeDamage(1);
-        MovControll();
-        
+
+        if (timeStop.TimeStopped)
+        {
+            agent.velocity = Vector3.zero; // stop moving
+            anim.speed = 0f;  //stop the animation
+        }
+        else
+        {
+            MovControll();
+            anim.speed = 2f;
+        }
+
+
     }
 
     private void MovControll()
@@ -160,4 +172,5 @@ public class FastEnemy : MonoBehaviour
             other.gameObject.GetComponent<TakeDamage>().TakeDamages(damagedeal);
         }
     }
+
 }

@@ -13,7 +13,8 @@ public class MeleeEnemy : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-    
+    public TimeStop timeStop;
+
     //damgedeal
     public float damagedeal=50f;
     //Patroling
@@ -45,7 +46,17 @@ public class MeleeEnemy : MonoBehaviour
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        MovControll();
+        if (timeStop.TimeStopped)
+        {
+            agent.velocity = Vector3.zero; // stop moving
+            anim.speed = 0f;  //stop the animation
+        }
+        else
+        {
+            MovControll();
+            anim.speed = 1f;
+        }
+        
     }
 
     private void MovControll()

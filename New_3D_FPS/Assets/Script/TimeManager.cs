@@ -6,9 +6,14 @@ public class TimeManager : MonoBehaviour
 {
     public float timeSlow = 0.05f;
     public float timeLength = 2f;
-
     public PauseMenu pause;
-
+    public TimeStop timeStop;
+    public float timeDuration = 3.5f;
+    private float elapsedTime;
+    private void Awake()
+    {
+       elapsedTime = timeDuration;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +26,18 @@ public class TimeManager : MonoBehaviour
         {
             pause.Pause();
         }
+
+        if (timeStop.TimeStopped==true)
+       {
+           timeDuration -= (elapsedTime * Time.deltaTime)/5;
+           timeDuration = Mathf.Clamp(timeDuration,0,elapsedTime);
+           Debug.Log(timeDuration);
+       }
+       if(timeDuration == 0)
+       {
+           timeStop.TimeResume();
+       }
+        
     }
 
 
